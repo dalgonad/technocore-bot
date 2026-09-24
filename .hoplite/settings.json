@@ -1,0 +1,30 @@
+{
+	"version": 1,
+	"inference": {
+		"run": {
+			"detectorVersion": 1,
+			"framework": "node",
+			"workspacePath": "game"
+		}
+	},
+	"ports": {
+		"preview": 3000,
+		"additional": {}
+	},
+	"services": [],
+	"scripts": {
+		"setup": {
+			"enabled": true,
+			"command": "node --version && node --check game/server.mjs"
+		},
+		"run": {
+			"enabled": true,
+			"command": "cd game && node server.mjs"
+		},
+		"archive": {
+			"enabled": true,
+			"command": null
+		}
+	},
+	"mcpServers": []
+}

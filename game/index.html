@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#254936">
+  <meta name="description" content="Tend your farm, meet your neighbors, and explore Meadow Valley. A cozy farming RPG adventure by Dlicom.">
+  <link rel="icon" href="./assets/logo.webp" type="image/webp">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Meadow Days · Dlicom</title>
+</head>
+<body>
+  <a class="skip-link" href="#world">Skip to the game</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Dlicom Meadow Days home"><span class="brand-mark"><img src="./assets/logo.webp" alt="" width="34" height="34"></span><span>dlicom<span class="brand-divider">/</span><span class="brand-game">meadow days</span></span></a>
+    <nav aria-label="Main navigation">
+      <button class="nav-button active" data-panel="play" aria-current="page"><span data-icon="sprout"></span>Play</button>
+      <button class="nav-button" data-panel="map"><span data-icon="map"></span>World map</button>
+      <button class="nav-button" data-panel="people"><span data-icon="people"></span>Villagers</button>
+      <button class="nav-button" data-panel="help"><span data-icon="book"></span>Guide</button>
+    </nav>
+    <div class="header-actions"><button class="icon-button" id="sound-button" aria-label="Enable sound" aria-pressed="false" title="Sound"><span data-icon="sound-off"></span></button><span class="header-separator"></span><button class="save-button" id="save-button" aria-label="Save game"><span data-icon="cloud"></span><span id="save-label">Save</span></button><button class="icon-button" data-panel="settings" aria-label="Settings"><span data-icon="settings"></span></button></div>
+  </header>
+
+  <main class="app-shell">
+    <section class="page-heading" aria-label="Welcome">
+      <div><p class="eyebrow"><span class="tiny-sprout">✦</span> A LITTLE PLACE. A BIG STORY.</p><h1>A new day in <em>Meadow Valley.</em></h1><p class="page-subtitle">Grow something. Meet someone. Find your adventure.</p></div>
+      <button class="journal-button" data-panel="quests"><span data-icon="book"></span>Adventure journal<span class="keycap">J</span></button>
+    </section>
+
+    <div class="play-layout">
+      <section class="game-column" aria-label="Game">
+        <div class="game-card">
+          <div class="stage" id="stage">
+            <canvas id="world" width="960" height="600" tabindex="0" aria-label="Meadow Valley world. WASD to move, E to interact, Space to use a tool."></canvas>
+            <div class="location-badge"><span class="location-symbol" data-icon="leaf"></span><div><strong id="location-name">Meadow Farm</strong><span id="location-description">Home, and the start of a new story.</span></div></div>
+            <div class="stage-actions"><span class="live-badge"><i></i><span id="world-status">WORLD ALIVE</span></span><button class="stage-icon" id="fullscreen-button" aria-label="Fullscreen"><span data-icon="expand"></span></button></div>
+            <div class="interaction-prompt" id="interaction-prompt"><kbd>E</kbd><span>Welcome to your farm</span></div>
+            <button class="resume-overlay" id="resume-overlay" hidden><span data-icon="play"></span><strong>Take a little breather.</strong><span>Game paused. Click to continue.</span></button>
+            <div class="loading-overlay" id="loading-overlay"><span class="loading-sprout">✿</span><strong>Growing your world…</strong><span>Preparing the farm.</span></div>
+            <div class="mobile-controls" aria-label="Touch controls">
+              <div class="dpad"><button data-move="up" aria-label="Move up">↑</button><button data-move="left" aria-label="Move left">←</button><button data-move="down" aria-label="Move down">↓</button><button data-move="right" aria-label="Move right">→</button></div>
+              <div class="touch-actions"><button id="touch-interact">E<span>Interact</span></button><button id="touch-tool"><span data-icon="hoe"></span><span>Tool</span></button></div>
+            </div>
+          </div>
+          <div class="toolbar-wrap"><div class="toolbar-label"><span>TOOLKIT</span><small id="selected-tool-name">Hoe</small></div><div class="toolbar" id="toolbar" role="group" aria-label="Choose a tool"></div><button class="bag-button" data-panel="bag" title="Backpack (I)"><span data-icon="bag"></span><span>Backpack</span><kbd>I</kbd></button></div>
+        </div>
+        <div class="game-footer"><div class="control-hints"><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> Move</span><span><kbd>SPACE</kbd> Tool</span><span><kbd>E</kbd> Interact</span><span><kbd>Q</kbd><kbd>R</kbd> Switch tool</span></div><button class="text-button" data-panel="help">All controls <span>↗</span></button></div>
+        <div class="below-game"><span class="soft-tag"><i></i> No need to rush. This is your story.</span><span id="autosave-hint">Progress saved on this device</span></div>
+      </section>
+
+      <aside class="sidebar" aria-label="Farm status">
+        <section class="day-card"><div class="day-topline"><span id="day-label">MONDAY, SPRING 1</span><span class="year-tag" id="year-label">YEAR 1</span></div><div class="clock-row"><div><strong id="clock">07:00</strong><span id="weather-label">A bright morning</span></div><span class="weather-art" id="weather-art" data-icon="sun"></span></div><div class="day-progress"><span id="day-progress"></span><i></i></div><div class="sun-times"><span>06:00</span><span data-icon="moon"></span><span>02:00</span></div><div class="day-card-bottom"><span><span class="coin-icon">G</span><strong id="gold">500</strong><small>gold</small></span><button id="sleep-button" title="Go home and sleep"><span data-icon="home"></span>Home</button></div></section>
+        <section class="energy-card"><div class="card-small-heading"><span><span data-icon="lightning"></span>Energy</span><strong><span id="stamina-value">100</span><small> / 100</small></strong></div><div class="energy-track"><span id="stamina-bar"></span></div><div class="vitals"><span><span data-icon="heart"></span><span id="health-value">100</span> HP</span><span><span data-icon="drop"></span><span id="water-value">30</span> / 30</span><button id="snack-button" title="Eat a piece of bread"><span data-icon="bread"></span>Eat</button></div></section>
+        <section class="quests-card"><div class="section-topline"><h2>Little steps today</h2><span class="count-badge" id="quest-count">0/3</span></div><p class="section-note">Every beginning has a story.</p><div id="quest-list" class="quest-list"></div><button class="quest-more" data-panel="quests">Open journal <span>→</span></button></section>
+        <button class="map-card" data-panel="map"><canvas id="mini-map" width="270" height="102" aria-hidden="true"></canvas><div><span class="map-card-icon" data-icon="compass"></span><span><strong>So much more to discover</strong><small>5 regions · one adventure</small></span><span class="map-arrow">↗</span></div></button>
+        <div class="sidebar-tip"><span data-icon="sparkles"></span><p id="daily-tip">Water today, harvest tomorrow. Water your crops before bed.</p></div>
+      </aside>
+    </div>
+  </main>
+  <footer class="site-footer"><span><strong>MEADOW DAYS</strong> <span class="footer-dot">·</span> a little world by dlicom</span><span>Made to be enjoyed, not rushed. <span class="footer-flower">✿</span></span></footer>
+
+  <dialog id="panel-dialog" aria-labelledby="panel-title"><div class="dialog-header"><div><p class="eyebrow" id="panel-eyebrow">MEADOW VALLEY</p><h2 id="panel-title">Journal</h2></div><button class="icon-button dialog-close" id="close-panel" aria-label="Close panel"><span data-icon="close"></span></button></div><div class="dialog-body" id="panel-body"></div></dialog>
+  <div class="toast-stack" id="toast-stack" role="status" aria-live="polite" aria-atomic="false"></div>
+  <input id="save-file" type="file" accept=".json,application/json" hidden>
+  <noscript><p class="no-script">Enable JavaScript to play Meadow Days. No account or wallet connection is required.</p></noscript>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
