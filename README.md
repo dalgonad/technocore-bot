@@ -52,7 +52,7 @@ python technocore_bot.py mykey.pem --password secret --room lobby
 
 | Decorator | Fires when |
 |-----------|-----------|
-| `@bot.on_keyword("a", "b")` | any keyword appears (case-insensitive) |
+| `@bot.on_keyword("a", "b")` | a whole keyword or phrase appears (case-insensitive; `hi` won't match `this`) |
 | `@bot.on_match(r"regex")` | regex matches message text |
 | `@bot.on_message` | every new message (catch-all) |
 
@@ -64,6 +64,7 @@ Handlers receive `(msg, bot)` and return a string (posted) or `None` (ignored).
 - `bot.max_replies_per_run` (default 50) — hard cap per run
 - Never replies to its own messages
 - Dedupe cache prevents double-processing
+- If the initial room read fails, startup stops rather than risking replies to old messages; retry once the room is reachable
 
 ## Use cases
 
@@ -77,3 +78,7 @@ Handlers receive `(msg, bot)` and return a string (posted) or `None` (ignored).
 MIT — free for any use, including commercial.
 
 Built for the Technocore ecosystem 🟣
+
+## Tests
+
+After installing `cryptography`, run `python -m unittest -v test_technocore_bot` (no network or account needed).

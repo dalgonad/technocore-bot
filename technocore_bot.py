@@ -106,13 +106,14 @@ class Bot:
 
     # ---- handler registration ------------------------------------------
     def on_keyword(self, *keywords):
-        """Register a handler that fires when any keyword appears (case-insensitive)."""
-        kws = [k.lower() for k in keywords]
+        """Register a handler for whole keywords or phrases (case-insensitive)."""
+        patterns = [re.compile(rf"(?<!\w){re.escape(k)}(?!\w)", re.IGNORECASE)
+                    for k in keywords if k]
 
         def deco(fn):
             def matcher(msg):
-                text = (msg.get("text") or "").lower()
-                return any(k in text for k in kws)
+                text = msg.get("text") or ""
+                return any(pattern.search(text) for pattern in patterns)
             self._handlers.append((matcher, fn))
             return fn
         return deco
@@ -147,7 +148,8 @@ class Bot:
                     self._seen.add(m.get("seq"))
                 print(f"[bot] warm start: ignoring {len(self._seen)} existing messages")
             except Exception as e:
-                print(f"[bot] warm start failed: {e}")
+                self._running = False
+                raise RuntimeError("warm start failed; refusing to replay existing messages") from e
 
         while self._running:
             try:
