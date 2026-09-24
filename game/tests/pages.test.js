@@ -23,7 +23,7 @@ async function listFiles(directory, prefix = '') {
   return files.sort();
 }
 
-test('Pages packaging removes stale files and publishes only the unchanged game runtime', async () => {
+test('Pages packaging removes stale files and creates a branch-publishable copy of the unchanged game runtime', async () => {
   await mkdir(output, { recursive: true });
   await writeFile(new URL('stale.txt', output), 'Do not publish');
   await run(process.execPath, [fileURLToPath(new URL('scripts/build-pages.mjs', root))]);

@@ -16,17 +16,25 @@ The repository-owned `.hoplite/settings.json` configures the managed Preview. Th
 
 ## Publish with GitHub Pages
 
-The game is fully static and can run at a repository subpath without a backend, API keys, or paid hosting. The `Meadow Days Pages` workflow tests pull requests, then publishes only the game when changes reach `master`.
+The game is fully static and runs at a repository subpath without a backend, API keys, or paid hosting. Publishing uses GitHub's **Deploy from a branch** mode, so the site is always built from the exact packaged files committed by `npm run build:pages`—no Actions workflows, secrets, or extra permissions required.
 
 One-time setup for a repository administrator:
 
-1. Open **Settings → Pages → Build and deployment** and set **Source** to **GitHub Actions**. Do not select a branch or the repository root: those contain the unrelated bot, not the game entrypoint.
-2. Merge the game pull request into `master`.
-3. Wait for **Actions → Meadow Days Pages → Deploy game to GitHub Pages** to succeed. Use the URL shown by that deployment; for this repository, the default address is `https://dalgonad.github.io/technocore-bot/`.
+1. Merge the game pull request into `master`, then update your local branch and run the steps below.
+2. Open **Settings → Pages → Build and deployment**, set **Source** to **Deploy from a branch**, choose the `gh-pages` branch, and set the folder to **/(root)**. Save.
+3. GitHub publishes the site within a few minutes. Use the URL shown on that settings page; for this repository, the default address is `https://dalgonad.github.io/technocore-bot/`.
 
-If Pages was enabled after the merge, run **Actions → Meadow Days Pages → Run workflow** on `master`. Any approval required by the `github-pages` environment must also be granted by an authorized reviewer. Pull requests only test/package the game; they never publish it.
+To publish a game update after new changes land in `master`, regenerate and push the branch:
 
-To inspect the exact deployment files locally:
+```sh
+git checkout master && git pull
+npm --prefix game test
+npm --prefix game run build:pages
+git subtree split --prefix game/dist -b gh-pages   # or: git checkout --orphan gh-pages from a fresh clone
+git push origin gh-pages --force
+```
+
+To inspect the exact deployment files locally before publishing:
 
 ```sh
 cd game
