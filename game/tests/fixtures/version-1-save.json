@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "day": 14,
+  "minute": 840,
+  "season": 2,
+  "year": 1,
+  "weather": "sunny",
+  "gold": 1777,
+  "stamina": 78,
+  "maxStamina": 100,
+  "water": 17,
+  "maxWater": 30,
+  "player": { "x": 16.5, "y": 18.5, "facing": "down", "hp": 100 },
+  "tool": "can",
+  "toolsOwned": ["hoe", "can", "seeds", "axe", "pickaxe", "rod", "sword"],
+  "selectedSeed": "carrot",
+  "inventory": { "carrot_seed": 8, "turnip": 3, "bread": 1 },
+  "inventoryCapacity": 24,
+  "farm": {
+    "16,22": {
+      "tilled": true,
+      "watered": true,
+      "crop": { "id": "carrot", "remaining": 2, "ready": false, "withered": false }
+    }
+  },
+  "monsters": [
+    { "id": "monster-slime-1", "type": "slime", "x": 8.5, "y": 33.5, "hp": 24, "defeated": false },
+    { "id": "monster-bat-1", "type": "cave_bat", "x": 45.5, "y": 7.5, "hp": 32, "defeated": false },
+    { "id": "monster-moss-1", "type": "moss_sprite", "x": 29.5, "y": 46.5, "hp": 42, "defeated": false },
+    { "id": "monster-crab-1", "type": "sand_crab", "x": 61.5, "y": 46.5, "hp": 36, "defeated": false }
+  ],
+  "animals": [
+    { "id": "chicken-1", "type": "chicken", "name": "Piko", "x": 28.5, "y": 17.5, "fed": true, "petted": true, "product": true }
+  ],
+  "friendship": { "dlira": 250, "dlito": 0, "dlizal": 0, "dliwi": 0, "dliyu": 0 },
+  "talked": { "dlira": true },
+  "gifted": {},
+  "shipping": { "turnip": 2 },
+  "stats": { "harvested": 5, "defeated": 0, "fished": 0, "mined": 0, "planted": 3, "talked": 2 },
+  "battle": null,
+  "fishing": null,
+  "quests": { "small_garden": { "claimed": true } },
+  "options": { "relaxed": true },
+  "rngSeed": 1296384324,
+  "timeRemainder": 0.5,
+  "resourceState": {}
+}
