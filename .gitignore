@@ -1,0 +1,6 @@
+.hoplite/*
+!.hoplite/settings.json
+game/node_modules/
+game/coverage/
+game/test-results/
+game/dist/
